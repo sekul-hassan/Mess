@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MessApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MessApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MessApplication.class, args);
+    }
 
 }
