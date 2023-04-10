@@ -3,11 +3,13 @@ package com.messmanagementback.Controller;
 import com.messmanagementback.Model.Member;
 import com.messmanagementback.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Component
 @CrossOrigin("http://localhost:3001")
 public class MemberController {
     @Autowired
