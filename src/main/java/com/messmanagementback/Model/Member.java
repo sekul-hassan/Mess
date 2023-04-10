@@ -18,5 +18,5 @@ public class Member {
     private String phone;
     private String addTk;
     private String backTk;
-    private String totalMeal;
+    private Double totalMeal;
 }

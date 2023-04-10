@@ -31,14 +31,20 @@ public class MemberController {
     @PutMapping("/oneMember/{id}")
     public Member updateMember(@RequestBody Member member, @PathVariable Long id){
         Member existingMember = memberService.getOne(id);
-        if(member.getName()!=null){
+        if(member.getName()!=""){
             existingMember.setName(member.getName());
         }
-        if(member.getEmail()!=null){
+        if(member.getEmail()!=""){
             existingMember.setEmail(member.getEmail());
         }
-       if(member.getPhone()!=null){
+       if(member.getPhone()!=""){
            existingMember.setPhone(member.getPhone());
+       }
+       if(member.getAddTk()!=""){
+           existingMember.setAddTk(member.getAddTk());
+       }
+       if(member.getTotalMeal()!=0.0){
+           existingMember.setTotalMeal(member.getTotalMeal());
        }
         return memberService.saveMember(existingMember);
     }
