@@ -1,5 +1,4 @@
 package com.messmanagementback.Model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +18,7 @@ public class Member {
     private String addTk;
     private String backTk;
     private Double totalMeal;
+    @ManyToOne
+    @JoinColumn(name = "messId")
+    private MessInfo messInfo;
 }

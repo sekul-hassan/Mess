@@ -24,34 +24,7 @@ public class ExtraBillController {
 
     @PostMapping("/saveBill")
     public ExtraBill saveBill(@RequestBody ExtraBill extraBill){
-        System.out.println(extraBill);
         return extraBillService.saveBill(extraBill);
-    }
-    @GetMapping("/getMess/{id}")
-    public Optional<ExtraBill> getOneMess(@PathVariable String id){
-        return extraBillService.getMess(id);
-    }
-
-    @PutMapping("/getMess/{id}")
-    public ExtraBill updateMess(@RequestBody ExtraBill extraBill, @PathVariable String id){
-        Optional<ExtraBill> existingOptional = extraBillService.getMess(id);
-        ExtraBill existing = existingOptional.orElse(null);
-        if(extraBill.getWifiBill()!=0){
-            existing.setWifiBill(extraBill.getWifiBill());
-        }
-        if(extraBill.getFixedMeal()!=0){
-            existing.setFixedMeal(extraBill.getFixedMeal());
-        }
-        if(extraBill.getKhalaBill()!=0){
-            existing.setKhalaBill(extraBill.getKhalaBill());
-        }
-
-        return extraBillService.saveBill(existing);
-    }
-
-    @DeleteMapping("/getMess/{id}")
-    public String deleteMess(@PathVariable String id){
-        return extraBillService.deleteMess(id);
     }
 
 }

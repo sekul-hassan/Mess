@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class Profile {
     @Autowired
     private MessInfoService messInfoService;
-    @Autowired
-    private HttpSession session;
 
     @GetMapping("/profile")
     public MessInfo getProfile(){
-        String loggedUserId = (String) session.getAttribute("loggedUser");
-        return messInfoService.findMess(loggedUserId);
+        return null;
+    }
+    @GetMapping("/currentMess")
+    public String currentMess(){
+        return null;
     }
 
 }

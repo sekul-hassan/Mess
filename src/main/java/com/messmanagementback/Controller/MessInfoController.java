@@ -1,5 +1,6 @@
 package com.messmanagementback.Controller;
 import com.messmanagementback.Model.MessInfo;
+import com.messmanagementback.Service.MemberService;
 import com.messmanagementback.Service.MessInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,8 +16,9 @@ public class MessInfoController {
     private MessInfoService messInfoService;
 
     @PostMapping("/saveMess")
-    public MessInfo saveMess(@RequestBody MessInfo messInfo){
-        return messInfoService.saveMess(messInfo);
+    public String  saveMess(@RequestBody MessInfo messInfo){
+        messInfoService.saveExtraWithByMessInfo(messInfo);
+        return "done";
     }
     @GetMapping("/findMess/{id}")
     public MessInfo getMess(@PathVariable String id){
@@ -45,4 +47,10 @@ public class MessInfoController {
     public String deleteMess(@PathVariable String id){
         return messInfoService.deleteMess(id);
     }
+
+
+    //// Here mapping testing
+
+
+
 }

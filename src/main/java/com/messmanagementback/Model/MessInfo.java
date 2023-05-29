@@ -1,10 +1,10 @@
 package com.messmanagementback.Model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,4 +16,8 @@ public class MessInfo {
     private String messName;
     private String messEmail;
     private String messPassword;
+    @OneToMany(mappedBy = "messInfo")
+    @JsonIgnore
+    private List<Member> members;
+
 }
