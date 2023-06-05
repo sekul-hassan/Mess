@@ -18,4 +18,19 @@ public class ExtraBillService {
        return extraBillRipository.save(extraBill);
    }
 
+   public ExtraBill findExtraBill(String messId){
+       return extraBillRipository.findById(messId).get();
+   }
+
+    public void updateBill(ExtraBill extraBill, String messId) {
+        ExtraBill existing = extraBillRipository.findById(messId).orElse(null);
+        if(existing != null){
+            existing.setMessId(messId);
+            existing.setWifiBill(extraBill.getWifiBill());
+            existing.setKhalaBill(extraBill.getKhalaBill());
+            existing.setFixedMeal(extraBill.getFixedMeal());
+            extraBillRipository.save(existing);
+        }
+    }
+
 }

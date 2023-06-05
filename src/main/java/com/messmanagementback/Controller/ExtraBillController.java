@@ -22,9 +22,20 @@ public class ExtraBillController {
     @Autowired
     private ExtraBillService extraBillService;
 
+    @GetMapping("/billIs/{messId}")
+    public ExtraBill findExtraBill(@PathVariable String messId){
+        return extraBillService.findExtraBill(messId);
+    }
+
     @PostMapping("/saveBill")
     public ExtraBill saveBill(@RequestBody ExtraBill extraBill){
         return extraBillService.saveBill(extraBill);
+    }
+
+    @PutMapping("/updateBill/{messId}")
+    public String updateeMess(@RequestBody ExtraBill extraBill,@PathVariable String messId){
+        extraBillService.updateBill(extraBill,messId);
+        return "Update Done";
     }
 
 }
