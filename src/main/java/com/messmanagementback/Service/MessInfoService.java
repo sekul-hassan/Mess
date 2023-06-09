@@ -1,7 +1,9 @@
 package com.messmanagementback.Service;
 
+import com.messmanagementback.Model.Cost;
 import com.messmanagementback.Model.ExtraBill;
 import com.messmanagementback.Model.MessInfo;
+import com.messmanagementback.Repository.CostRepository;
 import com.messmanagementback.Repository.MessInfoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ public class MessInfoService {
     private MessInfoRepository messInfoRepository;
     @Autowired
     private ExtraBillService extraBillService;
+    @Autowired
+    private CostRepository costRepository;
 
     public List<MessInfo> getAllMess(){
         return messInfoRepository.findAll();
@@ -32,6 +36,9 @@ public class MessInfoService {
         ExtraBill extraBill = new ExtraBill();
         extraBill.setMessId(id);
         extraBillService.saveBill(extraBill);
+        Cost cost = new Cost();
+        cost.setMessInfo(messInfo1);
+        costRepository.save(cost);
     }
     public String deleteMess(String id){
         messInfoRepository.deleteById(id);

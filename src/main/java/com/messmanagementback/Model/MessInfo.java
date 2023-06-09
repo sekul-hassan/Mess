@@ -19,5 +19,8 @@ public class MessInfo {
     @OneToMany(mappedBy = "messInfo")
     @JsonIgnore
     private List<Member> members;
+    @OneToMany(mappedBy = "messInfo")
+    @JsonIgnore
+    private List<Cost> costs;
 
 }
