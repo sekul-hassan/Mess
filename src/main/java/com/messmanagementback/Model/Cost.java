@@ -18,6 +18,8 @@ public class Cost {
     @ManyToOne
     @JoinColumn(name = "messId")
     private MessInfo messInfo;
-    private YearMonth monthYear;
+    private int year;
+    private int month;
+    private int day;
     private Double bill;
 }

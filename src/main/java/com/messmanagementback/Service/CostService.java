@@ -4,7 +4,10 @@ import com.messmanagementback.Model.MessInfo;
 import com.messmanagementback.Repository.CostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,10 +27,15 @@ public class CostService {
     }
 
     public Cost addCost(Cost cost,String messId){
-        YearMonth yearMonth = YearMonth.now();
+        LocalDate currentDate = LocalDate.now();
         MessInfo messInfo = messInfoService.findMess(messId);
+        int year = currentDate.getYear();
+        int month = currentDate.getMonthValue();
+        int day = currentDate.getDayOfMonth();
         cost.setMessInfo(messInfo);
-        cost.setMonthYear(yearMonth);
+        cost.setYear(year);
+        cost.setMonth(month);
+        cost.setDay(day);
         return costRepository.save(cost);
     }
 
