@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @Component
-@CrossOrigin("http://localhost:3001")
+@CrossOrigin("http://localhost:3000")
 public class MessInfoController {
     @Autowired
     private MessInfoService messInfoService;

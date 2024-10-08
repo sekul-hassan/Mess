@@ -58,6 +58,19 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version> <!-- Use the latest stable version -->
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

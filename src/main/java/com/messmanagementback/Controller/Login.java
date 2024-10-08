@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @RestController
 @Component
-@CrossOrigin("http://localhost:3001")
+@CrossOrigin("http://localhost:3000")
 public class Login {
     @Autowired
     private MessInfoService messInfoService;

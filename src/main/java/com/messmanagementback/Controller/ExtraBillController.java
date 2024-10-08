@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Component
 @RestController
-@CrossOrigin("http://localhost:3001")
+@CrossOrigin("http://localhost:3000")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
