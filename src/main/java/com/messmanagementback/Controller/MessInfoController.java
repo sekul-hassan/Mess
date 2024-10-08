@@ -3,6 +3,8 @@ import com.messmanagementback.Model.MessInfo;
 import com.messmanagementback.Service.MemberService;
 import com.messmanagementback.Service.MessInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +18,20 @@ public class MessInfoController {
     private MessInfoService messInfoService;
 
     @PostMapping("/saveMess")
-    public String  saveMess(@RequestBody MessInfo messInfo){
-        messInfoService.saveExtraWithByMessInfo(messInfo);
-        return "done";
+    public ResponseEntity<MessInfo> saveMess(@RequestBody MessInfo messInfo) {
+        try {
+            // Call the service method to save the mess info
+            MessInfo savedMessInfo = messInfoService.saveMess(messInfo);
+
+            // Return the saved MessInfo object with HTTP status 201 Created
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedMessInfo);
+
+        } catch (Exception e) {
+            // In case of an exception, return a bad request (400) or other relevant status code
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
+
     @GetMapping("/findMess/{id}")
     public MessInfo getMess(@PathVariable String id){
         return messInfoService.findMess(id);

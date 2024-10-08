@@ -27,6 +27,8 @@ public class MessInfoService {
         return messInfoRepository.findById(messId).get();
     }
     public MessInfo saveMess(MessInfo messInfo){
+        MessInfo messInfo1 = findMess(messInfo.getMessId());
+        if(messInfo1 != null){}
         return messInfoRepository.save(messInfo);
     }
     @Transactional
