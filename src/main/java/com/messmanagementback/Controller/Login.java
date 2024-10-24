@@ -24,7 +24,7 @@ public class Login {
         return "Hello world";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/pppp")
     public List<Member> login(@RequestParam("messId") String messId, @RequestParam("messPassword") String messPassword){
         boolean ok = false;
         List<MessInfo> allMember = messInfoService.getAllMess();
