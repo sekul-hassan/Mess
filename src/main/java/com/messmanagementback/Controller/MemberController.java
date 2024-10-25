@@ -6,10 +6,12 @@ import com.messmanagementback.Service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Component
@@ -17,17 +19,17 @@ import java.util.List;
 public class MemberController {
     @Autowired
     private MemberService memberService;
-    @Autowired
-    private HttpServletRequest request;
+
     @Autowired
     private  HttpSession session ;
+
     @PostMapping("/addMember/{messId}")
-    public Member addMember(@RequestBody Member member,@PathVariable String messId){
+    public ResponseEntity<Map<String,Object>> addMember(@RequestBody Member member, @PathVariable String messId){
         return memberService.addMember(member,messId);
     }
 
     @GetMapping("/allMember/{messId}")
-    public List<Member> getAllMember(@PathVariable String messId){
+    public ResponseEntity<Map<String,Object>> getAllMember(@PathVariable String messId){
         return memberService.getAllMember(messId);
     }
 
@@ -37,7 +39,7 @@ public class MemberController {
     }
 
     @PutMapping("/oneMember/{messId}/{id}")
-    public Member updateMember(@RequestBody Member member,@PathVariable String messId ,@PathVariable Long id){
+    public ResponseEntity<Map<String,Object>> updateMember(@RequestBody Member member,@PathVariable String messId ,@PathVariable Long id){
 
         return memberService.updateMember(member,messId,id);
     }

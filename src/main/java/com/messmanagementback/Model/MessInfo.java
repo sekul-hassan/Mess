@@ -16,7 +16,7 @@ public class MessInfo {
     private String messName;
     private String messEmail;
     private String messPassword;
-    @OneToMany(mappedBy = "messInfo")
+    @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Member> members;
     @OneToMany(mappedBy = "messInfo")

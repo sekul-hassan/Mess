@@ -21,7 +21,7 @@ public class CalculationService {
     @Autowired
     private ExtraBillRipository extraBillRipository;
     @Autowired
-    private MemberRipository memberRepository;
+    private MemberRepository memberRepository;
     @Autowired
     private SummaryRepository summaryRepository;
 
@@ -54,15 +54,15 @@ public class CalculationService {
                 totalMealValue = 0.0;
             }
             member.setTotalMeal(max(fixed, totalMealValue));
-            String tk = member.getAddTk();
-            if(tk==null) tk = "0";
-            totalTk += Long.parseLong(tk);
+            Double tk = member.getAddTk();
+            if(tk==null) tk = 0.0;
+            totalTk += tk;
             totalMeal += member.getTotalMeal();
         }
 
 
         for(Cost cost:costs){
-            totalCost += max(0,cost.getBill());
+            totalCost += (long) max(0,cost.getBill());
         }
 
         mealRate = (totalCost*1.0)/(totalMeal);
@@ -72,9 +72,8 @@ public class CalculationService {
 
         for(Member member:members){
             others += (1.0*member.getTotalMeal())*mealRate;
-            long getTK = Long.parseLong(member.getAddTk());
-            double remain = getTK-others;
-            String value = df.format(remain);
+            Double getTK = member.getAddTk();
+            Double value = getTK-others;
             member.setBackTk(value);
             memberRepository.save(member);
         }

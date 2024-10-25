@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MessInfoService {
@@ -28,9 +25,12 @@ public class MessInfoService {
     public List<MessInfo> getAllMess(){
         return messInfoRepository.findAll();
     }
-    public MessInfo findMess(String messId){
-        return messInfoRepository.findById(messId).get();
+
+    public MessInfo findMess(String messId) {
+        return messInfoRepository.findById(messId)
+                .orElseThrow(() -> new NoSuchElementException("Mess not found with ID: " + messId));
     }
+
 
 
     public ResponseEntity<Map<String, Object>> saveMess(MessInfo messInfo){

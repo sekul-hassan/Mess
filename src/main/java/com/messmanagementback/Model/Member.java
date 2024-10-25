@@ -12,13 +12,13 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String email;
-    private String phone;
-    private String addTk;
-    private String backTk;
-    private Double totalMeal;
-    @ManyToOne
+    private String name="";
+    private String email="";
+    private String phone="";
+    private Double addTk=0.0;
+    private Double backTk=0.0;
+    private Double totalMeal=0.0;
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "messId")
     private MessInfo messInfo;
 }
