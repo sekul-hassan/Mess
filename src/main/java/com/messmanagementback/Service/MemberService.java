@@ -3,6 +3,7 @@ package com.messmanagementback.Service;
 import com.messmanagementback.Model.Member;
 import com.messmanagementback.Model.MessInfo;
 import com.messmanagementback.Repository.MemberRepository;
+import com.messmanagementback.Repository.MessInfoRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,19 +25,22 @@ public class MemberService{
     @Autowired
     private MessInfoService messInfoService;
 
+    @Autowired
+    private MessInfoRepository messInfoRepository;
+
     // This is completed
     public ResponseEntity<Map<String,Object>> addMember(Member member, String messId){
 
         Map<String,Object> response = new HashMap<>();
 
         try {
-            MessInfo messInfo = messInfoService.findMess(messId);
-            if(Objects.isNull(messInfo)){
+            Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
+            if(messInfo.isEmpty()){
                 response.put("status", HttpStatus.NOT_FOUND.value());
                 response.put("message", "Mess does not exist");
             }
             else{
-                member.setMessInfo(messInfo);
+                member.setMessInfo(messInfo.get());
                 memberRepository.save(member);
                 response.put("status", HttpStatus.CREATED.value());
                 response.put("message", "Member added successful");
@@ -56,15 +60,15 @@ public class MemberService{
         Map<String,Object> response = new HashMap<>();
 
         try {
-            MessInfo messInfo = messInfoService.findMess(messId);
-            if(Objects.isNull(messInfo)){
+            Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
+            if(messInfo.isEmpty()){
                 response.put("status", HttpStatus.NOT_FOUND.value());
                 response.put("message", "Illegal Access");
             }
             else{
                 response.put("status", HttpStatus.OK.value());
                 response.put("message", "Member found");
-                response.put("data",messInfo.getMembers());
+                response.put("data",messInfo.get().getMembers());
             }
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }catch (Exception e){
@@ -80,14 +84,14 @@ public class MemberService{
         Map<String, Object> response = new HashMap<>();
 
         try {
-            MessInfo messInfo = messInfoService.findMess(messId);
-            List<Member> members = messInfo.getMembers();
+            Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
+            List<Member> members = messInfo.get().getMembers();
             boolean ok = false;
 
             for (Member member1 : members) {
                 if (member1.getId().equals(id)) {
                     member.setId(id);
-                    member.setMessInfo(messInfo);
+                    member.setMessInfo(messInfo.get());
 
                     if (Objects.equals(member.getEmail(), "")) {
                         member.setEmail(member1.getEmail());
@@ -131,8 +135,8 @@ public class MemberService{
 
 
     public Member getOne(String messId,Long id){
-        MessInfo messInfo = messInfoService.findMess(messId);
-        List<Member> members = messInfo.getMembers();
+        Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
+        List<Member> members = messInfo.get().getMembers();
         for(Member member:members){
             if(member.getId().equals(id)){
                 return member;
@@ -141,9 +145,20 @@ public class MemberService{
 
        return null;
     }
-    public void deleteMember(Long id){
-        memberRepository.deleteById(id);
-    }
 
+    /// This is completed
+    public ResponseEntity<Map<String,Object>> deleteMember(Long id){
+        Map<String,Object> response = new HashMap<>();
+        Optional<Member> member = memberRepository.findById(id);
+        if(member.isPresent()){
+            memberRepository.delete(member.get());
+            response.put("status", HttpStatus.OK.value());
+            response.put("message", "Member deleted successfully");
+        }else{
+            response.put("status", HttpStatus.NOT_FOUND.value());
+            response.put("message", "Member not found");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
 }

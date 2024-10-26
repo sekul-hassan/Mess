@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CostService {
@@ -26,23 +27,27 @@ public class CostService {
         return costRepository.save(cost1);
     }
 
-    public Cost addCost(Cost cost,String messId){
-        LocalDate currentDate = LocalDate.now();
-        MessInfo messInfo = messInfoService.findMess(messId);
-        int year = currentDate.getYear();
-        int month = currentDate.getMonthValue();
-        int day = currentDate.getDayOfMonth();
-        cost.setMessInfo(messInfo);
-        cost.setYear(year);
-        cost.setMonth(month);
-        cost.setDay(day);
-        return costRepository.save(cost);
-    }
-
-    public List<Cost> getAllCost(String messId){
-        MessInfo messInfo = messInfoService.findMess(messId);
-        return messInfo.getCosts();
-    }
+//    public Cost addCost(Cost cost,String messId){
+//        LocalDate currentDate = LocalDate.now();
+//        Optional<MessInfo> messInfo1 = messInfoService.findMess(messId);
+//        if(messInfo1.isPresent()){
+//            MessInfo messInfo = messInfo1.get();
+//            int year = currentDate.getYear();
+//            int month = currentDate.getMonthValue();
+//            int day = currentDate.getDayOfMonth();
+//            cost.setMessInfo(messInfo);
+//            cost.setYear(year);
+//            cost.setMonth(month);
+//            cost.setDay(day);
+//            return costRepository.save(cost);
+//        }
+//        return null;
+//    }
+//
+//    public List<Cost> getAllCost(String messId){
+//        Optional<MessInfo> messInfo = messInfoService.findMess(messId);
+//        return messInfo.map(MessInfo::getCosts).orElse(null);
+//    }
 
     public Cost deleteCost(Long id){
         Cost cost = costRepository.findById(id).get();

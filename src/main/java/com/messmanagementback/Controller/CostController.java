@@ -17,17 +17,17 @@ public class CostController {
     public Cost saveCost(@RequestBody Cost cost,@PathVariable Long id){
         return costService.saveCost(cost,id);
     }
-
-    @PostMapping("/saveCost/{messId}")
-    public Cost addCost(@RequestBody Cost cost,@PathVariable String messId){
-        return costService.addCost(cost,messId);
-    }
-
-
-    @GetMapping("getAllCost/{messId}")
-    public List<Cost> getAllCost(@PathVariable String messId){
-        return costService.getAllCost(messId);
-    }
+//
+//    @PostMapping("/saveCost/{messId}")
+//    public Cost addCost(@RequestBody Cost cost,@PathVariable String messId){
+//        return costService.addCost(cost,messId);
+//    }
+//
+//
+//    @GetMapping("getAllCost/{messId}")
+//    public List<Cost> getAllCost(@PathVariable String messId){
+//        return costService.getAllCost(messId);
+//    }
 
     @DeleteMapping("costDelete/{id}")
     public Cost deleteCost(@PathVariable Long id){

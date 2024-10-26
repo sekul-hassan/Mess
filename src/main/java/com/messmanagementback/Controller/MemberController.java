@@ -45,9 +45,8 @@ public class MemberController {
     }
 
     @DeleteMapping("/oneMember/{id}")
-    public String deleteMember(@PathVariable Long id){
-        memberService.deleteMember(id);
-        return "Member is deleted";
+    public ResponseEntity<Map<String,Object>> deleteMember(@PathVariable Long id){
+        return memberService.deleteMember(id);
     }
 
     @GetMapping("/checkSession")

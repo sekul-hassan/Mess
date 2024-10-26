@@ -26,9 +26,19 @@ public class MessInfoService {
         return messInfoRepository.findAll();
     }
 
-    public MessInfo findMess(String messId) {
-        return messInfoRepository.findById(messId)
-                .orElseThrow(() -> new NoSuchElementException("Mess not found with ID: " + messId));
+    public ResponseEntity<Map<String ,Object>> findMess(String messId) {
+        Map<String ,Object> response = new HashMap<>();
+
+        Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
+        if(messInfo.isPresent()){
+            response.put("message","Mess info found");
+            response.put("data", messInfo.get());
+            response.put("status", HttpStatus.OK);
+        }else{
+            response.put("message","Mess info not found");
+            response.put("status", HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(response);
     }
 
 

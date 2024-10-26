@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @Component
@@ -24,26 +25,26 @@ public class Login {
         return "Hello world";
     }
 
-    @GetMapping("/pppp")
-    public List<Member> login(@RequestParam("messId") String messId, @RequestParam("messPassword") String messPassword){
-        boolean ok = false;
-        List<MessInfo> allMember = messInfoService.getAllMess();
-        for(MessInfo member:allMember){
-            if(Objects.equals(member.getMessId(), messId) && Objects.equals(member.getMessPassword(), messPassword)){
-                ok = true;
-                break;
-            }
-        }
-        if(ok){
-            HttpSession session = request.getSession();
-            MessInfo loggedUser = messInfoService.findMess(messId);
-            session.setAttribute("messId",messId);
-            return loggedUser.getMembers();
-        }
-        else{
-            return  null;
-        }
-    }
+//    @GetMapping("/pppp")
+//    public List<Member> login(@RequestParam("messId") String messId, @RequestParam("messPassword") String messPassword){
+//        boolean ok = false;
+//        List<MessInfo> allMember = messInfoService.getAllMess();
+//        for(MessInfo member:allMember){
+//            if(Objects.equals(member.getMessId(), messId) && Objects.equals(member.getMessPassword(), messPassword)){
+//                ok = true;
+//                break;
+//            }
+//        }
+//        if(ok){
+//            HttpSession session = request.getSession();
+//            Optional<MessInfo> loggedUser = messInfoService.findMess(messId);
+//            session.setAttribute("messId",messId);
+//            return loggedUser.map(MessInfo::getMembers).orElse(null);
+//        }
+//        else{
+//            return  null;
+//        }
+//    }
 
     @GetMapping("/logout")
     public String logout(){

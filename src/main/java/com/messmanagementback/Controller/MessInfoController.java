@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @Component
@@ -31,7 +32,7 @@ public class MessInfoController {
     }
 
     @GetMapping("/findMess/{id}")
-    public MessInfo getMess(@PathVariable String id){
+    public ResponseEntity<Map<String,Object>> getMess(@PathVariable String id){
         return messInfoService.findMess(id);
     }
 
@@ -40,20 +41,20 @@ public class MessInfoController {
         return messInfoService.getAllMess();
     }
 
-    @PutMapping("/findMess/{id}")
-    public ResponseEntity<Map<String, Object>> updateMess(@RequestBody MessInfo messInfo, @PathVariable String id){
-        MessInfo existing = messInfoService.findMess(id);
-        if(messInfo.getMessEmail()!=null){
-            existing.setMessEmail(messInfo.getMessEmail());
-        }
-        if(messInfo.getMessName()!=null){
-            existing.setMessName(messInfo.getMessName());
-        }
-        if(messInfo.getMessPassword()!=null){
-            existing.setMessPassword(messInfo.getMessPassword());
-        }
-        return messInfoService.saveMess(existing);
-    }
+//    @PutMapping("/findMess/{id}")
+//    public ResponseEntity<Map<String, Object>> updateMess(@RequestBody MessInfo messInfo, @PathVariable String id){
+//        MessInfo existing = messInfoService.findMess(id);
+//        if(messInfo.getMessEmail()!=null){
+//            existing.setMessEmail(messInfo.getMessEmail());
+//        }
+//        if(messInfo.getMessName()!=null){
+//            existing.setMessName(messInfo.getMessName());
+//        }
+//        if(messInfo.getMessPassword()!=null){
+//            existing.setMessPassword(messInfo.getMessPassword());
+//        }
+//        return messInfoService.saveMess(existing);
+//    }
     @DeleteMapping("/findMess/{id}")
     public String deleteMess(@PathVariable String id){
         return messInfoService.deleteMess(id);
