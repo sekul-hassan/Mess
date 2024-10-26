@@ -19,7 +19,7 @@ public class MessInfo {
     @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Member> members;
-    @OneToMany(mappedBy = "messInfo")
+    @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Cost> costs;
 

@@ -29,7 +29,8 @@ public class Calculation {
 
     @GetMapping("calculation/{messId}")
     public Summary calculate(@PathVariable String messId){
-        return calculationService.calculate(messId);
+//        return calculationService.calculate(messId);
+        return null;
     }
 
 //    @GetMapping("test/{messId}")

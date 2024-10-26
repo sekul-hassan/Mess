@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CostRepository extends JpaRepository<Cost,Long> {
 
-    public Cost findCostByMessInfo(MessInfo messInfo);
-    public List<Cost> findAllByMessInfoAndYearAndMonth(MessInfo messInfo,int year,int month);
+//    public Cost findCostByMessInfo(MessInfo messInfo);
+//    public List<Cost> findAllByMessInfoAndYearAndMonth(MessInfo messInfo,int year,int month);
 }
