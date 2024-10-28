@@ -22,5 +22,8 @@ public class MessInfo {
     @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Cost> costs;
+    @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<ExtraBill> extraBills;
 
 }

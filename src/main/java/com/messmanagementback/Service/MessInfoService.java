@@ -108,14 +108,15 @@ public class MessInfoService {
 
     @Transactional
     public void saveExtraWithByMessInfo(MessInfo messInfo){
-        MessInfo messInfo1 = messInfoRepository.save(messInfo);
-        String id = messInfo1.getMessId();
-        ExtraBill extraBill = new ExtraBill();
-        extraBill.setMessId(id);
-        extraBillService.saveBill(extraBill);
-        Cost cost = new Cost();
-        cost.setMessInfo(messInfo1);
-        costRepository.save(cost);
+//        MessInfo messInfo1 = messInfoRepository.save(messInfo);
+//        String id = messInfo1.getMessId();
+//        ExtraBill extraBill = new ExtraBill();
+//        extraBill.setMessId(id);
+//        extraBillService.saveBill(extraBill);
+//        Cost cost = new Cost();
+//        cost.setMessInfo(messInfo1);
+//        costRepository.save(cost);
+        return ;
     }
     public String deleteMess(String id){
         messInfoRepository.deleteById(id);

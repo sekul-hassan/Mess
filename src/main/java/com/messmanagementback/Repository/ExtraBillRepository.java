@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ExtraBillRipository extends JpaRepository<ExtraBill,String> {
+public interface ExtraBillRepository extends JpaRepository<ExtraBill,Long> {
 }

@@ -1,6 +1,5 @@
 package com.messmanagementback.Model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +10,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class ExtraBill{
     @Id
-    private String messId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Double wifiBill;
     private Double fixedMeal;
     private Double khalaBill;
+    private Double others;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "messId")
+    private MessInfo messInfo;
 }

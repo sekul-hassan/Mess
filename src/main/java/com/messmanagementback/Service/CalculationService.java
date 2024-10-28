@@ -19,7 +19,7 @@ public class CalculationService {
     @Autowired
     private CostRepository costRepository;
     @Autowired
-    private ExtraBillRipository extraBillRipository;
+    private ExtraBillRepository extraBillRepository;
     @Autowired
     private MemberRepository memberRepository;
     @Autowired
