@@ -25,5 +25,8 @@ public class MessInfo {
     @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<ExtraBill> extraBills;
+    @OneToOne(mappedBy = "messInfo",fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Profile profile;
 
 }
