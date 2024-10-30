@@ -22,15 +22,17 @@ public class ProfileController {
     private ProfileService profileService;
 
     @PutMapping("/profile/{messId}")
-    public ResponseEntity<Map<String, Object>> updateProfile(@PathVariable String messId, @RequestParam("profilePic") MultipartFile profilePic, @RequestParam("coverPic") MultipartFile coverPic) {
+    public ResponseEntity<Map<String, Object>> updateProfile(@PathVariable String messId, @RequestParam("profilePic") MultipartFile profilePic) {
 
-        return profileService.updateProfile(profilePic,coverPic,messId);
+        return profileService.updateProfile(profilePic,messId);
     }
 
-    @GetMapping("/profile")
-    public MessInfo getProfile(){
-        return null;
+    @GetMapping("/profile/{messId}")
+    public ResponseEntity<Map<String ,Object>> getProfile(@PathVariable String messId){
+        return profileService.getAProfile(messId);
     }
+
+
     @GetMapping("/currentMess")
     public String currentMess(){
         return null;

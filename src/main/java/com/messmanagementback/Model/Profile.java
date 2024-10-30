@@ -14,7 +14,6 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String profilePic;
-    private String coverPic;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "messId")
     private MessInfo messInfo;
