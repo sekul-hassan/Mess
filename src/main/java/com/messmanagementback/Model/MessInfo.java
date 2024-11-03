@@ -1,9 +1,12 @@
 package com.messmanagementback.Model;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,17 +19,33 @@ public class MessInfo {
     private String messName;
     private String messEmail;
     private String messPassword;
+
     @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Member> members;
+
     @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Cost> costs;
+
     @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<ExtraBill> extraBills;
-    @OneToOne(mappedBy = "messInfo",fetch = FetchType.EAGER)
+
+    @OneToOne(mappedBy = "messInfo", fetch = FetchType.EAGER)
     @JsonIgnore
     private Profile profile;
 
+    @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Summary> summaries;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", updatable = false)
+    private Date createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
 }

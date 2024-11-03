@@ -2,6 +2,7 @@ package com.messmanagementback.Service;
 
 import com.messmanagementback.Model.Cost;
 import com.messmanagementback.Model.ExtraBill;
+import com.messmanagementback.Model.Member;
 import com.messmanagementback.Model.MessInfo;
 import com.messmanagementback.Repository.CostRepository;
 import com.messmanagementback.Repository.MessInfoRepository;
@@ -41,8 +42,6 @@ public class MessInfoService {
         return ResponseEntity.ok(response);
     }
 
-
-
     public ResponseEntity<Map<String, Object>> saveMess(MessInfo messInfo){
 
         Map<String,Object> response = new HashMap<>();
@@ -77,7 +76,6 @@ public class MessInfoService {
         }
     }
 
-
     public ResponseEntity<Map<String, Object>> loginMess(String messId, String password) {
         Map<String, Object> response = new HashMap<>();
         System.out.println(messId + " " + password);
@@ -103,6 +101,25 @@ public class MessInfoService {
 
         // Return the built response at the end
         return ResponseEntity.status((int) response.get("status")).body(response);
+    }
+
+    public ResponseEntity<Map<String ,Object>> calcMealRate(String messId, String mealRate1) {
+        Map<String ,Object> response = new HashMap<>();
+        try {
+            Long mealRate = Long.parseLong(mealRate1);
+            Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
+            if(messInfo.isPresent()) {
+                MessInfo messInfo1 = messInfo.get();
+                List<Member> members = messInfo1.getMembers();
+                
+            }
+        }catch (Exception e){
+            response.put("status",HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.put("message",e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+
+        return null;
     }
 
 

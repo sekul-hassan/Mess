@@ -36,9 +36,14 @@ public class MessInfoController {
         return messInfoService.findMess(id);
     }
 
-    @GetMapping("findMess")
+    @GetMapping("/findMess")
     public List<MessInfo> getAllMess(){
         return messInfoService.getAllMess();
+    }
+
+    @GetMapping("/calculateMealRate/{messId}/{fixedMeal}")
+    public ResponseEntity<Map<String ,Object>> calculateMealRate(@PathVariable String messId,@PathVariable String fixedMeal){
+        return messInfoService.calcMealRate(messId,fixedMeal);
     }
 
 //    @PutMapping("/findMess/{id}")
