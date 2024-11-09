@@ -27,7 +27,6 @@ public class ExtraBillService {
    @Autowired
    private MessInfoRepository messInfoRepository;
 
-    // This is completed
    public ResponseEntity<Map<String,Object>> saveBill(ExtraBill extraBill, String messId){
        Map<String,Object> response = new HashMap<>();
        try {
@@ -51,7 +50,6 @@ public class ExtraBillService {
        }
    }
 
-   // This is completed
    public ResponseEntity<Map<String ,Object>> findExtraBill(String messId){
       Map<String ,Object> response = new HashMap<>();
 
@@ -113,8 +111,6 @@ public class ExtraBillService {
         }
     }
 
-
-    // This is completed
     public ResponseEntity<Map<String ,Object>> deleteExtraBill(Long id){
        Map<String ,Object> response = new HashMap<>();
 

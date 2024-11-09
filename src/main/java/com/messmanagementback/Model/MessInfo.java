@@ -20,23 +20,23 @@ public class MessInfo {
     private String messEmail;
     private String messPassword;
 
-    @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "messInfo", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Member> members;
 
-    @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "messInfo", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Cost> costs;
 
-    @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "messInfo", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<ExtraBill> extraBills;
 
-    @OneToOne(mappedBy = "messInfo", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "messInfo", fetch = FetchType.LAZY)
     @JsonIgnore
     private Profile profile;
 
-    @OneToMany(mappedBy = "messInfo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "messInfo", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Summary> summaries;
 
