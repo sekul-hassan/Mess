@@ -15,13 +15,11 @@ public class Summary {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long addTk;
-    private Long totalCost;
-    private Double totalMeal;
-    private Double Khala;
-    private Double wifi;
-    private Double fixed;
-    private Double mealRate;
+    private double addTk;
+    private double totalCost;
+    private double totalMeal;
+    private double mealRate;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "messId")
     private MessInfo messInfo;
@@ -34,4 +32,5 @@ public class Summary {
     protected void onCreate() {
         createdAt = new Date();
     }
+
 }

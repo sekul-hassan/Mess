@@ -11,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Data
@@ -28,11 +25,27 @@ public class ExtraBillService {
    private MessInfoRepository messInfoRepository;
 
    public ResponseEntity<Map<String,Object>> saveBill(ExtraBill extraBill, String messId){
+
+       Date date = new Date();
+       Calendar calendar = Calendar.getInstance();
+       calendar.setTime(date);
+
+       int year = calendar.get(Calendar.YEAR);
+       int month = calendar.get(Calendar.MONTH) + 1;
+
+
+
        Map<String,Object> response = new HashMap<>();
        try {
            Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
            if (messInfo.isPresent()) {
                MessInfo messInfo1 = messInfo.get();
+               Optional<List<ExtraBill>> extraBillOptional = extraBillRepository.findAllByMessInfoAndYearAndMonth(messInfo1,year,month);
+               if (extraBillOptional.isPresent()) {
+                   response.put("status", HttpStatus.CONFLICT);
+                   response.put("message","You can not add new extra bill to this month.\nYou can modify this.");
+                   return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+               }
                extraBill.setMessInfo(messInfo1);
                ExtraBill extraBill1 = extraBillRepository.save(extraBill);
                response.put("status", HttpStatus.CREATED.value());

@@ -25,13 +25,13 @@ public class Calculation {
     @Autowired
     private CalculationService calculationService;
 
-    @GetMapping("calculation/{messId}/{month}/{year}")
+    @GetMapping("calculation/{messId}/{year}/{month}")
     public ResponseEntity<Map<String , Object>> calculate(
             @PathVariable String messId,
-            @PathVariable int month,
-            @PathVariable int year
+            @PathVariable int year,
+            @PathVariable int month
     ){
-        return calculationService.calculate(messId,month,year);
+        return calculationService.calculate(messId,year,month);
     }
 
 
