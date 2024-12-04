@@ -37,7 +37,7 @@ public class MessInfoController {
     }
 
     @GetMapping("/findMess")
-    public List<MessInfo> getAllMess(){
+    public List<String> getAllMess(){
         return messInfoService.getAllMess();
     }
 
@@ -46,28 +46,9 @@ public class MessInfoController {
         return messInfoService.calcMealRate(messId,fixedMeal);
     }
 
-//    @PutMapping("/findMess/{id}")
-//    public ResponseEntity<Map<String, Object>> updateMess(@RequestBody MessInfo messInfo, @PathVariable String id){
-//        MessInfo existing = messInfoService.findMess(id);
-//        if(messInfo.getMessEmail()!=null){
-//            existing.setMessEmail(messInfo.getMessEmail());
-//        }
-//        if(messInfo.getMessName()!=null){
-//            existing.setMessName(messInfo.getMessName());
-//        }
-//        if(messInfo.getMessPassword()!=null){
-//            existing.setMessPassword(messInfo.getMessPassword());
-//        }
-//        return messInfoService.saveMess(existing);
-//    }
     @DeleteMapping("/findMess/{id}")
     public String deleteMess(@PathVariable String id){
         return messInfoService.deleteMess(id);
     }
-
-
-    //// Here mapping testing
-
-
 
 }

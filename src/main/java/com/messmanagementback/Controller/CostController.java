@@ -26,9 +26,14 @@ public class CostController {
     }
 
 
-    @GetMapping("getAllCost/{messId}")
-    public ResponseEntity<Map<String,Object>> getAllCost(@PathVariable String messId){
-        return costService.getAllCost(messId);
+    @GetMapping("getAllCost/{messId}/{year}/{month}")
+    public ResponseEntity<Map<String,Object>> getAllCost(
+            @PathVariable String messId,
+            @PathVariable int year,
+            @PathVariable int month
+
+    ){
+        return costService.getAllCost(messId,year,month);
     }
 
     @DeleteMapping("deleteCost/{id}")

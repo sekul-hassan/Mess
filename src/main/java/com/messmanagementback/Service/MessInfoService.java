@@ -23,8 +23,16 @@ public class MessInfoService {
     @Autowired
     private CostRepository costRepository;
 
-    public List<MessInfo> getAllMess(){
-        return messInfoRepository.findAll();
+    public List<String> getAllMess(){
+        ArrayList<String> data = new ArrayList<>();
+        List<MessInfo> messInfoList = messInfoRepository.findAll();
+
+        for(MessInfo messInfo : messInfoList){
+            data.add(messInfo.getMessId());
+            data.add(messInfo.getMessEmail());
+        }
+
+        return data;
     }
 
     public ResponseEntity<Map<String ,Object>> findMess(String messId) {

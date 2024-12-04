@@ -25,9 +25,14 @@ public class ExtraBillController {
     @Autowired
     private ExtraBillService extraBillService;
 
-    @GetMapping("/extraBillIs/{messId}")
-    public ResponseEntity<Map<String,Object>> allExtraBillOfAMess(@PathVariable String messId){
-        return extraBillService.findExtraBill(messId);
+    @GetMapping("/extraBillIs/{messId}/{year}/{month}")
+    public ResponseEntity<Map<String,Object>> allExtraBillOfAMess(
+            @PathVariable String messId,
+            @PathVariable int year,
+            @PathVariable int month
+
+    ){
+        return extraBillService.findExtraBill(messId,year,month);
     }
 
     @PostMapping("/saveBill/{messId}")

@@ -41,7 +41,8 @@ public class ExtraBillService {
            if (messInfo.isPresent()) {
                MessInfo messInfo1 = messInfo.get();
                Optional<List<ExtraBill>> extraBillOptional = extraBillRepository.findAllByMessInfoAndYearAndMonth(messInfo1,year,month);
-               if (extraBillOptional.isPresent()) {
+               if (extraBillOptional.isPresent() && !extraBillOptional.get().isEmpty()) {
+                   System.out.println(extraBillOptional.get().size());
                    response.put("status", HttpStatus.CONFLICT);
                    response.put("message","You can not add new extra bill to this month.\nYou can modify this.");
                    return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
@@ -63,18 +64,24 @@ public class ExtraBillService {
        }
    }
 
-   public ResponseEntity<Map<String ,Object>> findExtraBill(String messId){
+   public ResponseEntity<Map<String ,Object>> findExtraBill(String messId,int year,int month){
       Map<String ,Object> response = new HashMap<>();
 
       try {
           Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
           if (messInfo.isPresent()) {
               MessInfo messInfo1 = messInfo.get();
-              List<ExtraBill> extraBills = messInfo1.getExtraBills();
-              response.put("status", HttpStatus.OK.value());
-              response.put("message","ExtraBill found successful.");
-              response.put("data", extraBills);
-              return ResponseEntity.status(HttpStatus.OK).body(response);
+
+              Optional<List<ExtraBill>> extraBills = extraBillRepository.findAllByMessInfoAndYearAndMonth(messInfo1,year,month);
+              if (extraBills.isPresent() && !extraBills.get().isEmpty()) {
+                  response.put("status", HttpStatus.OK.value());
+                  response.put("message","ExtraBill found successful.");
+                  response.put("data", extraBills.get());
+                  return ResponseEntity.status(HttpStatus.OK).body(response);
+              }
+              response.put("status", HttpStatus.NOT_FOUND.value());
+              response.put("message","This extra bill does not found.");
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
           }
           response.put("status", HttpStatus.NOT_FOUND.value());
           response.put("message","This mess does not found.");

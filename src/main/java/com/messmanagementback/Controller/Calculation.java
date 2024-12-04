@@ -34,5 +34,10 @@ public class Calculation {
         return calculationService.calculate(messId,year,month);
     }
 
+    @GetMapping("/graphData/{messId}")
+    public ResponseEntity<Map<String ,Object>> graphData(@PathVariable String messId){
+        return calculationService.getGraphData(messId);
+    }
+
 
 }

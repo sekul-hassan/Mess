@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.*;
 
@@ -83,7 +82,7 @@ public class CostService {
     }
 
     // This is completed
-    public ResponseEntity<Map<String,Object>> getAllCost(String messId){
+    public ResponseEntity<Map<String,Object>> getAllCost(String messId,int year,int month){
 
         Map<String, Object> response = new HashMap<>();
 
@@ -91,11 +90,18 @@ public class CostService {
             Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
             if (messInfo.isPresent()) {
                 MessInfo messInfo1 = messInfo.get();
-                List<Cost> costs = messInfo1.getCosts();
-                response.put("status", HttpStatus.OK.value());
-                response.put("message", "Costs found");
-                response.put("data", costs);
-                return ResponseEntity.status(HttpStatus.OK.value()).body(response);
+                Optional<List<Cost>> costs = costRepository.findAllByMessInfoAndYearAndMonth(messInfo1,year,month);
+
+                if (costs.isPresent()) {
+                    response.put("status", HttpStatus.OK.value());
+                    response.put("message", "Costs found");
+                    response.put("data", costs);
+                    return ResponseEntity.status(HttpStatus.OK.value()).body(response);
+                }
+
+                response.put("status", HttpStatus.NOT_FOUND.value());
+                response.put("message", "cost not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(response);
             }
             response.put("status", HttpStatus.NOT_FOUND.value());
             response.put("message", "MessInfo not found with ID: " + messId);

@@ -32,6 +32,8 @@ public class MemberService{
     public ResponseEntity<Map<String,Object>> addMember(Member member, String messId){
 
         Map<String,Object> response = new HashMap<>();
+        member.setAddTk(0.0);
+        member.setBackTk(0.0);
 
         try {
             Optional<MessInfo> messInfo = messInfoRepository.findById(messId);
@@ -41,10 +43,10 @@ public class MemberService{
             }
             else{
                 member.setMessInfo(messInfo.get());
-                memberRepository.save(member);
+                Member newMember = memberRepository.save(member);
                 response.put("status", HttpStatus.CREATED.value());
                 response.put("message", "Member added successful");
-                response.put("data",member);
+                response.put("data",newMember);
             }
 
            return ResponseEntity.status(HttpStatus.CREATED).body(response);
